@@ -93,7 +93,7 @@ export const POST = async (request: NextRequest) => {
   const course = await prisma.course.findMany({
     where: { courseNo },
   });
-  const findCourse = course.find((c) => c.courseNo === courseNo);
+  const findCourse = course.find((c :any) => c.courseNo === courseNo);
   if (!findCourse) {
     return NextResponse.json({
     ok: false,
@@ -103,7 +103,7 @@ export const POST = async (request: NextRequest) => {
   );}
 
   // check if already enrolled
-  const isEnrolled = enrollments.find((enrollment) => enrollment.courseNo === courseNo);
+  const isEnrolled = enrollments.find((enrollment :any) => enrollment.courseNo === courseNo);
   if (isEnrolled) {
     return NextResponse.json({
     ok: false,
@@ -166,7 +166,7 @@ export const DELETE = async (request: NextRequest) => {
       include: { course: true },
     });
 
-  const isEnrolled = enrollments.find((enrollment) => enrollment.courseNo === courseNo);
+  const isEnrolled = enrollments.find((enrollment :any) => enrollment.courseNo === courseNo);
   if (!isEnrolled) {
     return NextResponse.json({
     ok: false,
